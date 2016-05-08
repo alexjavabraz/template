@@ -9,7 +9,7 @@
 	<name>FacesTeamplateSpring</name>
 	
 	<properties>
-        <project.java.version>1.8</project.java.version>
+        <project.java.version>1.7</project.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.2.6.RELEASE</spring.version>
         <mojarra.version>2.2.6</mojarra.version>
