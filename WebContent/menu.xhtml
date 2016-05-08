@@ -1,0 +1,36 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>  
+	<p:growl id="messages" />
+	<p:menubar id="menubar">
+		<p:submenu label="Cadastrar" icon="ui-icon-document">
+			<p:menuitem value="Estabelecimento"
+				url="cadastrar_estabelecimento.jsf" icon="ui-icon-pencil" />
+			<p:separator />
+			<p:menuitem value="Cidade" url="teste.xhtml" />
+			<p:menuitem value="Estado" url="#" />
+			<p:menuitem value="Categoria" url="#" />
+			<p:menuitem value="Grupo" url="#" />
+			<p:menuitem value="Sub-Grupo" url="#" />
+		</p:submenu>
+	
+		<p:submenu label="Pesquisar" icon="ui-icon-search">
+			<p:menuitem value="Estabelecimentos" action="#{pesquisarEstabelecimentosBean.doClick}"
+				icon="ui-icon-arrowreturnthick-1-w" />
+			<p:menuitem value="Usuários" url="#"
+				icon="ui-icon-arrowreturnthick-1-e" />
+			<p:menuitem value="Contatos" url="#"
+				icon="ui-icon-arrowreturnthick-1-e" />
+			<p:menuitem value="Simulador" url="pesquisarAplicacao.jsf"
+				icon="ui-icon-arrowreturnthick-1-e" />				
+		</p:submenu>
+	
+	</p:menubar>
+	
+	<p:sticky target="menubar" />
+	</h:form>
+</ui:composition>

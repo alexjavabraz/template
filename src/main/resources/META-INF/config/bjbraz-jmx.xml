@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- =========================================================================================================== -->
+    <!-- Exporta MBeans com estatisticas dos servicos                                                                -->
+    <!-- =========================================================================================================== -->
+
+    <bean id="serviceMbeanExporter" class="br.com.bjbraz.app.estabelecimentos.config.jmx.ServiceMBeanExporter">
+        <property name="namingStrategy" ref="namingStrategy"/>
+    </bean>
+
+    <!-- =========================================================================================================== -->
+    <!-- Exporta MBeans com anotacoes                                                                                -->
+    <!-- =========================================================================================================== -->
+
+    <bean id="mbeanExporter" class="org.springframework.jmx.export.MBeanExporter">
+        <property name="autodetect" value="true"/>
+        <property name="assembler" ref="assembler"/>
+        <property name="namingStrategy" ref="namingStrategy"/>
+        <property name="registrationBehaviorName" value="REGISTRATION_IGNORE_EXISTING"/>
+    </bean>
+
+    <bean id="assembler" class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+        <property name="attributeSource" ref="attributeSource"/>
+    </bean>
+
+    <bean id="attributeSource" class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource"/>
+
+    <!-- =========================================================================================================== -->
+    <!-- MBeans com versao do framework e aplicacao                                                                  -->
+    <!-- =========================================================================================================== -->
+
+    <bean id="applicationVersionInfo" class="br.com.bjbraz.app.estabelecimentos.config.jmx.ApplicationVersionInfo"/>
+    <bean id="frameworkVersionInfo" class="br.com.bjbraz.app.estabelecimentos.config.jmx.FrameworkVersionInfo"/>
+
+</beans>

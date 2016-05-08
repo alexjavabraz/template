@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+<f:view contentType="text/html" encoding="ISO-8859-1">
+	<h:head>
+		<meta content="text/html; charset=ISO-8859-1"
+			http-equiv="Content-Type" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/themes/cupertino/skin.css" />
+	</h:head>
+
+	<h:body>
+		<ui:include src="menu.xhtml" />
+		<br/>
+		<h:form id="form">
+
+			<p:dataTable var="movies" value="#{movieView.movieList}" rows="5"
+				paginator="true">
+				<p:column headerText="Movie">
+					<h:outputText value="#{movies.movie}" />
+				</p:column>
+
+				<p:column headerText="Directed By">
+					<h:outputText value="#{movies.directedBy}" />
+				</p:column>
+
+				<p:column headerText="Genres">
+					<h:outputText value="#{movies.genres}" />
+				</p:column>
+
+				<p:column headerText="Run Time(min.)">
+					<h:outputText value="#{movies.runTime}" />
+				</p:column>
+
+				<p:column style="width:32px;text-align: center">
+					<p:commandButton update=":form:carDetail"
+						oncomplete="PF('carOP').show('#{component.clientId}')"
+						icon="ui-icon-search" title="View">
+						<f:setPropertyActionListener value="#{movies}"
+							target="#{movieView.movie}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+			<p:dialog header="Modal Dialog" modal="true" widgetVar="carOP" showEffect="fade" hideEffect="fade"
+				dismissable="false" showCloseIcon="true">
+				<p:outputPanel id="carDetail" style="text-align:center;">
+					<p:panelGrid columns="2" rendered="#{not empty movieView.movie}"
+						columnClasses="label,value">
+						<h:outputText value="Id:" />
+						<h:outputText value="#{movieView.movie.runTime}" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+
+		</h:form>
+
+	</h:body>
+</f:view>
+</html>

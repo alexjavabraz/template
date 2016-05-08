@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<f:view contentType="text/html" encoding="ISO-8859-1">
+	<h:head>
+		<meta content="text/html; charset=ISO-8859-1"
+			http-equiv="Content-Type" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/themes/cupertino/skin.css" />
+	</h:head>
+
+	<h:body>
+
+		<ui:include src="menu.xhtml" />
+		<br/>
+		
+		<h:form id="form">
+			
+			
+			<p:panelGrid columns="3" layout="grid">
+				<h:outputText value="Nome do Estabelecimento" /> 
+			    <h:outputText value="Endereço" /> 
+			    <h:outputText value="Número" /> 
+			    
+			    <p:inputText id="nome" placeholder="Nome do Estabelecimento" value="#{pesquisarEstabelecimentosBean.filtro.nomeFantasia}" />
+			    <p:inputText id="endereco" placeholder="Endereço" value="#{pesquisarEstabelecimentosBean.filtro.endRua}" />
+			    <p:inputText id="numero" placeholder="Número"  value="#{pesquisarEstabelecimentosBean.filtro.endNumero}"  />
+			 
+			    <h:outputText value="Bairro" /> 
+			    <h:outputText value="Telefone Fixo" />
+			    <h:outputText value="Telefone Celular" />
+			    
+			    <p:inputText id="bairro" placeholder="Bairro"  value="#{pesquisarEstabelecimentosBean.filtro.bairro}" />
+			    <p:inputMask id="telFixo" placeholder="Telefone Fixo" value="#{pesquisarEstabelecimentosBean.filtro.telefone}"    mask="(999) 9999-9999"/>	    
+				<p:inputMask id="telCel" placeholder="Telefone Celular" maxlength="6" value="#{meuManagedBBean.estabelecimento.slogam}" mask="(999) 99999-9999"/>	    
+			    
+			    <h:outputText value="Cep" /> 
+			    <h:outputText value="Site" /> 
+			    <h:outputText value="E-mail" /> 
+			    
+			    
+			    <p:inputText id="cep" placeholder="Cep"  value="#{pesquisarEstabelecimentosBean.filtro.cep}"/>
+			    <p:inputText id="site" placeholder="Site"  value="#{pesquisarEstabelecimentosBean.filtro.site}"/>
+			    <p:inputText id="email" placeholder="E-mail"  value="#{pesquisarEstabelecimentosBean.filtro.email}">
+	            </p:inputText>
+				
+			</p:panelGrid>
+			
+			
+				<p align='center'>
+					<p:commandButton ajax="false" action="#{pesquisarEstabelecimentosBean.pesquisar}" value="Pesquisar Estabelecimentos" icon="ui-icon-search" style="display:block;margin:10px 0" validateClient="true"/>
+				</p>
+			
+				<p:dataTable id="tbl" var="estabelecimento" value="#{pesquisarEstabelecimentosBean.estabelecimentos}" 
+					paginator="true" rows="10" style="margin-bottom:20px">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nome Fantasia" />
+						</f:facet>
+						<h:outputText value="#{estabelecimento.nomeFantasia}" />
+					</p:column>	
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="E-mail" />
+						</f:facet>
+						<h:outputText value="#{estabelecimento.email}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Site" />
+						</f:facet>
+						<h:outputText value="#{estabelecimento.site}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Telefone" />
+						</f:facet>
+						<h:outputText value="#{estabelecimento.telefone}" />
+					</p:column>	
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Endereço" />
+						</f:facet>
+						<h:outputText value="#{estabelecimento.endRua}" />,
+						<h:outputText value="#{estabelecimento.endNumero}" />,
+						<h:outputText value="#{estabelecimento.endRua}" />
+					</p:column>
+					
+					<p:column style="width:20px;text-align: left;align: left">
+			            <p:commandButton update=":form:dialog" oncomplete="PF('documentDialog').show('#{component.clientId}')" icon="ui-icon-search">
+			                <f:setPropertyActionListener value="#{estabelecimento}" target="#{pesquisarEstabelecimentosBean.estabelecimento}" />
+			            </p:commandButton>
+			        </p:column>
+			        
+					
+				</p:dataTable>
+			
+				<h:panelGrid columns="2" cellpadding="10">
+			        <p:outputLabel for="basic" value="Basic:" /> 
+			        <p:themeSwitcher id="basic" style="width:165px">
+			            <f:selectItem itemLabel="Choose Theme" itemValue="" />
+			            <f:selectItems value="[afterdark, afternoon, afterwork, aristo, black-tie, blitzer, bluesky, bootstrap, casablanca, cupertino, cruze, dark-hive, delta, dot-luv, eggplant, excite-bike, flick, glass-x, home, hot-sneaks, humanity, le-frog, midnight, mint-choc, omega, overcast, pepper-grinder, redmond, rocket, sam, smoothness, south-street, start, sunny, swanky-purse, trontastic, ui-darkness, ui-lightness, vader]" var="theme" itemLabel="" itemValue=""/>
+			        </p:themeSwitcher>
+			 
+			        <p:outputLabel for="advanced" value="Advanced:" /> 
+			        <p:themeSwitcher id="advanced" style="width:165px" effect="fade" var="t">
+			            <f:selectItem itemLabel="Choose Theme" itemValue="" />
+			            <f:selectItems value="[afterdark, afternoon, afterwork, aristo, black-tie, blitzer, bluesky, bootstrap, casablanca, cupertino, cruze, dark-hive, delta, dot-luv, eggplant, excite-bike, flick, glass-x, home, hot-sneaks, humanity, le-frog, midnight, mint-choc, omega, overcast, pepper-grinder, redmond, rocket, sam, smoothness, south-street, start, sunny, swanky-purse, trontastic, ui-darkness, ui-lightness, vader]" var="theme" itemLabel="" itemValue="" />
+			 
+			            <p:column>
+			                <h:outputText styleClass="ui-theme ui-theme-" style="display-block" />
+			            </p:column>
+			 
+			            <p:column>
+			                 
+			            </p:column>
+			        </p:themeSwitcher>
+			    </h:panelGrid>
+				
+					<p:dialog id="dialog" header="Estabelecimento" showEffect="fade" widgetVar="documentDialog" modal="true" resizable="false">
+				        <p:outputPanel id="documentPanel">
+				            <p:panelGrid  columns="4" columnClasses="label,value" rendered="#{pesquisarEstabelecimentosBean.estabelecimento ne null}">
+				                <h:outputLabel for="name" value="Nome Fantasia: " />
+				                <p:inputText id="name" placeholder="Nome Fantasia"  value="#{pesquisarEstabelecimentosBean.estabelecimento.nomeFantasia}"/>
+				 
+				                <h:outputLabel for="xemail" value="E-mail:" />
+				                <p:inputText id="xemail" placeholder="E-mail"  value="#{pesquisarEstabelecimentosBean.estabelecimento.email}"/>
+				 
+				                <h:outputLabel for="xsite" value="Site:" />
+				                <p:inputText id="xsite" placeholder="Site"  value="#{pesquisarEstabelecimentosBean.estabelecimento.site}"/>
+				                
+	                			<h:outputLabel for="xface" value="Facebook:" />
+				                <p:inputText id="xface" value="#{pesquisarEstabelecimentosBean.estabelecimento.facebook}" />					                
+				                
+				                <h:outputLabel for="xtel" value="Telefone:" />
+				                <p:inputText id="xtel" placeholder="Telefone"  value="#{pesquisarEstabelecimentosBean.estabelecimento.telefone}"/>
+				                
+				                <h:outputLabel for="xendereco" value="Endereço:" />
+				                <p:inputText id="xendereco" placeholder="Endereço"  value="#{pesquisarEstabelecimentosBean.estabelecimento.endRua}"/>
+				                
+				                <h:outputLabel for="xnumero" value="Número:" />
+				                <p:inputText id="xnumero" placeholder="Número"  value="#{pesquisarEstabelecimentosBean.estabelecimento.endNumero}"/>
+				                
+				                <h:outputLabel for="xcomplemento" value="Complemento:" />
+				                <p:inputText id="xcomplemento" placeholder="Complemento"  value="#{pesquisarEstabelecimentosBean.estabelecimento.endComplemento}"/>			                
+				                
+				                <h:outputLabel for="xbairro" value="Bairro:" />
+				                <p:inputText id="xbairro" placeholder="Bairro"  value="#{pesquisarEstabelecimentosBean.estabelecimento.bairro}"/>
+				                
+	                			<h:outputLabel for="xcep" value="Cep:" />
+				                <p:inputText id="xcep" value="#{pesquisarEstabelecimentosBean.estabelecimento.cep}" />	
+				                
+				                <h:outputLabel for="xdestaque" value="Destaque:" />
+				                <p:selectBooleanCheckbox id="xdestaque" value="#{pesquisarEstabelecimentosBean.estabelecimento.idDestaque}" />
+	
+	                			<h:outputLabel for="xposicao" value="Posição:" />
+				                <p:inputText id="xposicao" value="#{pesquisarEstabelecimentosBean.estabelecimento.posicao}" />				                
+				                
+				                <h:outputLabel for="xdatainclusao" value="Data Inclusão:" />
+								<h:outputText id="xdatainclusao" value="#{pesquisarEstabelecimentosBean.estabelecimento.dhInclusao}" >
+								    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+
+	                			<h:outputLabel for="ximagem" value="Imagem:" />
+				                <p:graphicImage id="ximagem" width="150px" style="width:150px;height:150px" value="#{pesquisarEstabelecimentosBean.estabelecimento.imagem}"  />
+				                
+				                <h:outputLabel for="xfile" value="Imagem:" />
+				                <p:fileUpload fileUploadListener="#{pesquisarEstabelecimentosBean.preparaImagem}" id="xfile" update="dialog" value="#{pesquisarEstabelecimentosBean.estabelecimento.file}" mode="simple" skinSimple="true"/>
+				                
+				                <h:outputLabel  value="Nome Imagem:" />
+				                <h:outputLabel  value="#{pesquisarEstabelecimentosBean.estabelecimento.imagem.name}" />
+				                
+				            </p:panelGrid>
+				                <p align='center'>
+				                	<p:commandButton ajax="false" action="#{pesquisarEstabelecimentosBean.salvar}" value="Salvar" icon="ui-icon-update" style="display:block;margin:10px 0" validateClient="true"/>
+				                </p>			            
+				        </p:outputPanel>
+				    </p:dialog>
+
+		</h:form>
+		 	
+
+	</h:body>
+</f:view>
+</html>

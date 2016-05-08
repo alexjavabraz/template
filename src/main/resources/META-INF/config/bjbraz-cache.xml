@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+    <!-- =========================================================================================================== -->
+    <!-- Cache                                                                                                       -->
+    <!-- =========================================================================================================== -->
+
+    <!-- A configuracao do EHCache deve ser feita pela aplicacao no arquivo "ehcache.xml"                            -->
+    <!-- Os beans "cachingModels" e "flushingModels" devem ser definidos no contexto da aplicacao                    -->
+    <!--
+    <util:constant id="cacheAspectOrder" static-field="br.com.bjbraz.framework.aop.FrameworkPointcutsuts.CACHE_ASPECT_ORDER"/>
+
+    <bean id="cacheProviderFacade" class="org.springmodules.cache.provider.ehcache.EhCacheFacade">
+        <property name="cacheManager" ref="cacheManager"/>
+    </bean>
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:META-INF/ehcache.xml"/>
+    </bean>
+
+    <bean id="cachingAttributeSource" class="org.springmodules.cache.annotations.AnnotationCachingAttributeSource"/>
+
+    <bean id="cachingInterceptor" class="org.springmodules.cache.interceptor.caching.MetadataCachingInterceptor">
+        <property name="cacheProviderFacade" ref="cacheProviderFacade"/>
+        <property name="cachingAttributeSource" ref="cachingAttributeSource"/>
+        <property name="cachingModels" ref="cachingModels"/>
+    </bean>
+
+    <bean id="cachingAttributeSourceAdvisor"
+          class="org.springmodules.cache.interceptor.caching.CachingAttributeSourceAdvisor">
+        <constructor-arg ref="cachingInterceptor"/>
+        <property name="order" ref="cacheAspectOrder"/>
+    </bean>
+
+
+    <bean id="flushingAttributeSource" class="org.springmodules.cache.annotations.AnnotationFlushingAttributeSource"/>
+
+    <bean id="flushingInterceptor" class="org.springmodules.cache.interceptor.flush.MetadataFlushingInterceptor">
+        <property name="cacheProviderFacade" ref="cacheProviderFacade"/>
+        <property name="flushingAttributeSource" ref="flushingAttributeSource"/>
+        <property name="flushingModels" ref="flushingModels"/>
+    </bean>
+
+    <bean id="flushingAttributeSourceAdvisor"
+          class="org.springmodules.cache.interceptor.flush.FlushingAttributeSourceAdvisor">
+        <constructor-arg ref="flushingInterceptor"/>
+        <property name="order" ref="cacheAspectOrder"/>
+    </bean>
+    -->
+</beans>

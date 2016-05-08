@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd ">
+
+    <!-- =========================================================================================================== -->
+    <!-- Audit                                                                                                         -->
+    <!-- =========================================================================================================== -->
+
+<!--     <bean id="auditEventsQueue" class="java.util.concurrent.ArrayBlockingQueue"> -->
+<!--         <constructor-arg index="0" value="128"/> -->
+<!--         <constructor-arg index="1" value="true"/> -->
+<!--     </bean> -->
+
+<!--     <bean class="br.com.bjbraz.framework.audit.AuditTrail" init-method="setupLogger"> -->
+<!--         <constructor-arg index="0" ref="auditEventsQueue"/> -->
+<!--     </bean> -->
+
+<!--     <bean class="br.com.bjbraz.framework.audit.AuditEventManager" init-method="start" destroy-method="stop" -->
+<!--           autowire="byType"> -->
+<!--         <property name="auditEventQueue" ref="auditEventsQueue"/> -->
+<!--     </bean> -->
+
+</beans>

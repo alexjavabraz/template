@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <!-- =========================================================================================================== -->
+    <!-- Appenders                                                                                                   -->
+    <!-- =========================================================================================================== -->
+
+    <appender name="DEBUG_APPLICATION_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${BASE_LOG_PATH}/${application.name}-debug.log</File>
+        <Append>false</Append>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${BASE_LOG_PATH}/${application.name}-debug_%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+		
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} {%X{user}} %msg%n</Pattern>
+        </layout>
+    </appender>
+
+
+    <!-- =========================================================================================================== -->
+    <!-- Loggers                                                                                                     -->
+    <!-- =========================================================================================================== -->
+
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="DEBUG_APPLICATION_LOG_FILE"/>
+    </root>
+
+    <!-- commons =================================================================================================== -->
+
+    <logger name="org.apache">
+        <level value="ERROR"/>
+    </logger>
+
+    <!-- Hibernate ================================================================================================= -->
+
+    <logger name="org.hibernate">
+        <level value="INFO"/>
+    </logger>
+    <logger name="org.hibernate.SQL">
+        <level value="DEBUG"/>
+    </logger>
+    
+    
+
+    <logger name="javax.persistence.EntityManager">
+        <level value="INFO"/>
+    </logger>
+
+    <!-- Spring ==================================================================================================== -->
+
+    <logger name="org.springframework">
+        <level value="INFO"/>
+    </logger>
+    <logger name="org.springframework.jdbc">
+    	<level value="INFO"/>
+    </logger>
+
+
+    <!-- JSF ================================================================================================= -->
+
+
+
+    <logger name="com.icesoft.faces.facelets">
+        <level value="DEBUG"/>
+    </logger>
+
+    <logger name="javax.faces">
+        <level value="INFO"/>
+    </logger>
+
+    <logger name="com.sun.faces">
+        <level value="INFO"/>
+    </logger>
+
+    <logger name="com.icesoft">
+        <level value="INFO"/>
+    </logger>
+
+    <!-- Framework JAB ============================================================================================= -->
+
+    <logger name="br.com.bjbraz.framework">
+        <level value="DEBUG"/>
+    </logger>
+
+    <!-- Aplicacao ================================================================================================= -->
+
+    <logger name="br.com.bjbraz.app.mobuy">
+        <level value="DEBUG"/>
+    </logger>
+
+</configuration>

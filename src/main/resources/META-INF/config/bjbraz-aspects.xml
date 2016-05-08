@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+    <!-- =========================================================================================================== -->
+    <!-- AOP                                                                                                         -->
+    <!-- =========================================================================================================== -->
+
+    <aop:aspectj-autoproxy/>
+
+<!--     <bean class="br.com.bjbraz.framework.aop.FrameworkPointcuts"/> -->
+
+<!--     <bean class="br.com.bjbraz.framework.aop.AuditAspect"/> -->
+<!--     <bean class="br.com.bjbraz.framework.aop.AuthorizeAspect"/> -->
+<!--     <bean class="br.com.bjbraz.framework.aop.ExceptionBarrierAspect"/> -->
+<!--     <bean class="br.com.bjbraz.framework.aop.LogAspect"/> -->
+<!--     <bean class="br.com.bjbraz.framework.aop.MonitorAspect"/> -->
+<!--     <bean class="br.com.bjbraz.framework.aop.FlushAspect"/> -->
+
+
+</beans>

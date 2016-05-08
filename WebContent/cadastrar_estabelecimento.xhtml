@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view contentType="text/html" encoding="ISO-8859-1">
+<h:head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+<link type="text/css" rel="stylesheet" href="#{request.contextPath}/themes/cupertino/skin.css"/>
+</h:head>
+
+<h:body>
+	<ui:include src="menu.xhtml" />
+	<br/>
+	<h:form enctype="multipart/form-data">
+
+		<p:panelGrid columns="3" layout="grid">
+		
+		    <h:outputText value="Nome do Estabelecimento" /> 
+		    <h:outputText value="Endereço" /> 
+		    <h:outputText value="Número" /> 
+		    
+		    <p:inputText id="nome" placeholder="Nome do Estabelecimento" value="#{meuManagedBBean.estabelecimento.nomeFantasia}" />
+		    <p:inputText id="endereco" placeholder="Endereço" value="#{meuManagedBBean.estabelecimento.endRua}" />
+		    <p:inputText id="numero" placeholder="Número"  value="#{meuManagedBBean.estabelecimento.endNumero}"  />
+		 
+		    <h:outputText value="Bairro" /> 
+		    <h:outputText value="Telefone Fixo" />
+		    <h:outputText value="Telefone Celular" />
+		    
+		    <p:inputText id="bairro" placeholder="Bairro"  value="#{meuManagedBBean.estabelecimento.bairro}" />
+		    <p:inputMask id="telFixo" placeholder="Telefone Fixo" value="#{meuManagedBBean.estabelecimento.telefone}"    mask="(999) 9999-9999"/>	    
+			<p:inputMask id="telCel" placeholder="Telefone Celular" maxlength="6" value="#{meuManagedBBean.estabelecimento.slogam}" mask="(999) 99999-9999"/>	    
+		    
+		    <h:outputText value="Cep" /> 
+		    <h:outputText value="Site" /> 
+		    <h:outputText value="E-mail" /> 
+		    
+		    
+		    <p:inputText id="cep" placeholder="Cep"  value="#{meuManagedBBean.estabelecimento.cep}"/>
+		    <p:inputText id="site" placeholder="Site"  value="#{meuManagedBBean.estabelecimento.site}"/>
+		    <p:inputText id="email" placeholder="E-mail"  value="#{meuManagedBBean.estabelecimento.email}">
+                <f:validator validatorId="custom.emailValidator" />
+            </p:inputText>
+		    
+		    <h:outputText value="Página do Facebook" />
+		    <h:outputText value="Destacar?" />  
+		    <h:outputText value="Logo (150 px x 150 px)" />
+		     
+		    <p:inputText id="facebookid" placeholder="Página do Facebook"  value="#{meuManagedBBean.estabelecimento.facebook}"/>	
+        	<p:selectBooleanCheckbox value="#{meuManagedBBean.destaque}" />
+    		<p:fileUpload value="#{meuManagedBBean.file}" mode="simple" skinSimple="true"/>
+    		
+		    <h:outputText value="" />
+		    <h:outputText value="Posição" />  
+		    <h:outputText value="" />
+		    
+		    <h:outputText value="" />
+		    <p:inputText id="posicao" placeholder="posicao"  value="#{meuManagedBBean.estabelecimento.posicao}"/>
+		    <h:outputText value="Quanto maior o valor, mais acima na lista aparecerá" />		    
+ 
+			</p:panelGrid>
+				<p:multiSelectListbox value="#{meuManagedBBean.selection}"
+					effect="highlight" header="Categoria" showHeaders="true" >
+					<f:selectItems value="#{meuManagedBBean.categories}"  filter="true" filterMatchMode="contains" />
+				</p:multiSelectListbox> 		
+			<p align="center">
+			
+			<p:commandButton ajax="false" action="#{meuManagedBBean.upload}" value="Adicionar Imagem" icon="ui-icon-check" style="display:block;margin:10px 0" validateClient="true"/>
+		</p>
+
+	</h:form>
+	 
+    </h:body>
+    </f:view>
+</html>

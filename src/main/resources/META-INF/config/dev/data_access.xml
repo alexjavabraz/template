@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd">
+                           
+    <!-- =========================================================================================================== -->
+    <!-- @Repository Exception Translator                                                                            -->
+    <!-- =========================================================================================================== -->
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>    
+                           
+	<!--===========================================================================================================-->
+	<!--	Data Source Entity Manager 1	-->
+	<!--===========================================================================================================-->
+	<jee:jndi-lookup id="dataSource1" jndi-name="jdbc/MySQLDB2" />
+	                       
+
+	<!--===========================================================================================================-->
+	<!--	Persistent Unit Padrao	-->
+	<!--===========================================================================================================-->
+	<bean id="defaultPersistentUnitName" class="java.lang.String">
+		<constructor-arg value="manager1" />
+	</bean>
+	
+
+	<!--===========================================================================================================-->
+	<!--	Local onde encontra-se o persistence.xml	-->
+	<!--===========================================================================================================-->
+	<util:list id="persistentXmlPaths">
+		<value>classpath*:META-INF/persistence-tomcat.xml</value>
+	</util:list>
+	
+	
+	<!--===========================================================================================================-->
+	<!--	Entity Manager 1	-->
+	<!--===========================================================================================================-->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		autowire-candidate="default">
+		<property name="persistenceUnitManager" ref="persistenceUnitManager"/>
+		<property name="persistenceUnitName" value="manager1"/>
+	</bean>	
+	
+	<!--===========================================================================================================-->
+	<!--	Cada Data Source deve ser registrado neste map	-->
+	<!--===========================================================================================================-->
+	<util:map id="dataSources">
+		<entry key="datasource1">
+			<ref local="dataSource1"/>
+		</entry>
+	</util:map>
+	
+
+	<!-- =========================================================================================================== -->
+    <!-- JPA                                                                                                         -->
+    <!-- =========================================================================================================== -->
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor">
+        <property name="defaultPersistenceUnitName">
+            <ref bean="defaultPersistentUnitName"/>
+        </property>
+    </bean>
+    
+    <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+        <property name="persistenceXmlLocations" ref="persistentXmlPaths"/>
+        <property name="dataSources" ref="dataSources"/>
+    </bean>	
+
+</beans>
